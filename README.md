@@ -2,25 +2,15 @@
 
 A native Android library for integrating Cashia's hosted checkout into your Android applications using Jetpack Compose. Similar to Stripe's Payment Sheet and RevenueCat's Paywall, this SDK provides a pre-built, customizable checkout UI that can be easily embedded in your app.
 
-## Features
-
-✅ **Native Compose Integration** - Built entirely with Jetpack Compose for modern Android apps  
-✅ **Pre-built UI** - No need to build your own checkout interface  
-✅ **Secure HMAC Authentication** - Built-in authentication handling  
-✅ **Easy Integration** - Just a few lines of code to get started  
-✅ **Flexible Presentation** - Show as a composable or fullscreen dialog  
-✅ **Comprehensive Error Handling** - Clear error states and callbacks  
-✅ **Type-safe API** - Kotlin-first design with sealed classes for results
-
 ## Architecture
 
 The SDK is split into two modules:
 
-- **cashia-core**: Core functionality including API client, authentication, and data models
-- **cashia-ui**: Compose UI components for displaying the checkout interface
+- **cashia-core**: Securely connects to Cashia API and provides ability to make API calls.
+- **cashia-ui**: provides a ready-to-use composable that can be seamlessly integrated into your app, helping you add functionality without building the UI from scratch.
+
 
 ## Installation
-
 ### Gradle
 
 Add the Cashia Checkout SDK to your `build.gradle.kts`:
@@ -41,8 +31,8 @@ include(":cashia-ui")
 
 // build.gradle.kts
 dependencies {
-    implementation(project(":cashia-core"))
-    implementation(project(":cashia-ui"))
+    api(project(":cashia-core"))
+    api(project(":cashia-ui"))
 }
 ```
 
@@ -71,7 +61,7 @@ class MyApplication : Application() {
 
 ### 2. Present the Checkout
 
-Use the `CashiaCheckoutDialog` composable to present the checkout UI:
+Use the `CashiaCheckoutDialog` composable to present the checkout UI when using cashia-ui
 
 ```kotlin
 @Composable
@@ -212,67 +202,17 @@ data class CheckoutSessionRequest(
 )
 ```
 
-### CheckoutResult
+### CheckoutResponse
 
 ```kotlin
-sealed class CheckoutResult {
-    data class Success(
-        val requestId: String,
-        val status: String
-    ) : CheckoutResult()
-    
-    data class Failed(
-        val requestId: String?,
-        val reason: String
-    ) : CheckoutResult()
-    
-    object Cancelled : CheckoutResult()
-    
-    data class Error(
-        val error: Throwable,
-        val message: String
-    ) : CheckoutResult()
-}
-```
-
-## Comparison with Other SDKs
-
-### Like Stripe Payment Sheet
-
-Just like Stripe's Payment Sheet for Android, Cashia Checkout provides:
-- A pre-built payment UI
-- Compose-first integration
-- Simple presentation API
-- Automatic session management
-
-```kotlin
-// Stripe Payment Sheet
-paymentSheet.presentWithPaymentIntent(clientSecret, configuration)
-
-// Cashia Checkout
-CashiaCheckoutDialog(showDialog = true, checkoutRequest = request, onResult = {})
-```
-
-### Like RevenueCat Paywalls
-
-Similar to RevenueCat's paywall presentation:
-- Composable-based UI
-- Flexible presentation options (dialog or inline)
-- Result callbacks for handling outcomes
-
-```kotlin
-// RevenueCat Paywall
-PaywallDialog(
-    PaywallDialogOptions.Builder()
-        .setListener(listener)
-        .build()
-)
-
-// Cashia Checkout
-CashiaCheckoutDialog(
-    showDialog = true,
-    checkoutRequest = request,
-    onResult = { result -> }
+@Serializable
+data class CheckoutSessionResponse(
+    val sessionId: String,
+    val requestId: String,
+    val url: String,
+    val amount: Double,
+    val currency: String,
+    val coin: String
 )
 ```
 
@@ -311,21 +251,6 @@ CashiaCheckoutDialog(
 )
 ```
 
-### Testing
-
-For testing, use the staging environment:
-
-```kotlin
-Cashia.initialize(
-    context = this,
-    configuration = CashiaConfiguration(
-        keyId = "test_key_id",
-        secretKey = "test_secret_key",
-        environment = CashiaConfiguration.CashiaEnvironment.STAGING
-    )
-)
-```
-
 ## Requirements
 
 - **Minimum SDK**: 24 (Android 7.0)
@@ -345,50 +270,16 @@ The SDK requires the following permission (automatically included):
 
 - All API requests are authenticated using HMAC SHA256
 - Use Android Keystore to manage your keys in production apps
-- Use environment variables or secure storage for credentials
 - The checkout UI runs in a secure WebView with JavaScript enabled
 
-## Troubleshooting
-
-### SDK Not Initialized Error
-
-```
-java.lang.IllegalStateException: Cashia SDK not initialized
-```
-
-**Solution**: Make sure you call `Cashia.initialize()` in your `Application.onCreate()` before using any SDK features.
-
-### WebView Not Loading
-
-If the checkout WebView is blank:
-1. Check your internet connection
-2. Verify your API credentials are correct
-3. Ensure you're using the correct environment (staging vs production)
-4. Check logcat for network errors
-
-### HMAC Authentication Errors
-
-If you're getting 401/403 errors:
-1. Verify your `keyId` and `secretKey` are correct
-2. Ensure system time is synchronized
-3. Check that you're using the matching environment
-
-## Sample App
-
-A complete sample app is included in the `sample` module. To run it:
-
-1. Open the project in Android Studio
-2. Update the credentials in `SampleApplication.kt`
-3. Run the app on a device or emulator
 
 ## License
-
 MIT
 
 ## Support
 
 For issues, questions, or feature requests:
-- Email: support@cashia.com
+- Email: josephmuasya8@gmail.com
 - Documentation: https://developer.cashia.com
 - GitHub Issues: 
 
@@ -400,43 +291,3 @@ For issues, questions, or feature requests:
 - HMAC authentication
 - Support for multiple payment methods
 - Comprehensive error handling
-
-### Hackathon Demo
-# Carbon Credits Marketplace
-A modern Android marketplace application where farmers can register their farms and crops to generate carbon credits, which companies can browse and purchase through Cashi payment gateway payment system.
-
-## ✨ Features
-### 💳 Checkout & Payment
-- Checkout Using cashi Android SDK
-  ![Payment](assets/payment.png)
-  Secure payment processing for transactions.
-
-### 🌾 Farmer Registration
-- Modern Compose forms with validation
-- Dynamic crop addition with Material dropdowns
-- **Real-time carbon credit calculation**
-- Automatic listing creation
-- Responsive layout design
-  ![Add Farm Screen](assets/add_farm.png)
-
-### 🛒 Marketplace
-- Beautiful Material 3 cards
-- Search functionality with real-time filtering
-- Smooth list animations
-- Pull-to-refresh support
-- Responsive grid/list layouts
-- ![Marketplace](assets/marketplace.png)
-
-### 🛍️ Shopping Cart
-- Interactive quantity controls
-- Swipe-to-delete gestures
-- Real-time total updates
-- Material dialogs for confirmation
-- Badge notifications
-
-### 👤 Buyer Profile
-- Clean form design
-- Status indicators
-- Form validation
-- Material 3 text fields
-  ![Buyer Profile](assets/farmer_profile.png)

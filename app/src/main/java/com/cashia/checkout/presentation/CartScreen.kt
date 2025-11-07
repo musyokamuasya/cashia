@@ -36,7 +36,7 @@ import com.cashia.ui.CheckoutResult
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CartScreen(onNavigateToProfile: () -> Unit) {
+fun MainScreen() {
     var showCheckout by remember { mutableStateOf(false) }
     var checkoutResultMessage by remember { mutableStateOf<String?>(null) }
     var showResultDialog by remember { mutableStateOf(false) }
@@ -45,23 +45,23 @@ fun CartScreen(onNavigateToProfile: () -> Unit) {
         CheckoutSessionRequest(
             requestId = "order-2-2${System.currentTimeMillis()}",
             currency = "KES",
-            amount = 2, // $90.00
+            amount = 2,
             webhookUrl = "https://ciox-kiosk.com/webhook",
             successRedirectUrl = "https://ciox-kiosk.com/success",
             errorRedirectUrl = "https://ciox-kiosk.com/error",
             orderDetails = listOf(
                 OrderDetail(
-                    name = "Kicks Kali 2",
+                    name = "Nice Shoes",
                     currency = "KES",
                     quantity = 1,
-                    description = "Kicks kali sana",
+                    description = "Very nice shoes",
                     price = 1
                 ),
                 OrderDetail(
-                    name = "Pure glow 2",
+                    name = "Inspirational Book",
                     currency = "KES",
                     quantity = 1,
-                    description = "Pure glow skincare jar",
+                    description = "A very inspirational book",
                     price = 1
                 )
             ),
