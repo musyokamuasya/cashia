@@ -400,3 +400,43 @@ For issues, questions, or feature requests:
 - HMAC authentication
 - Support for multiple payment methods
 - Comprehensive error handling
+
+### Hackathon Demo
+# Carbon Credits Marketplace
+A modern Android marketplace application where farmers can register their farms and crops to generate carbon credits, which companies can browse and purchase through Cashi payment gateway payment system.
+
+## ✨ Features
+### 💳 Checkout & Payment
+- Checkout Using cashi Android SDK
+  ![Payment](assets/payment.png)
+  Secure payment processing for transactions.
+
+### 🌾 Farmer Registration
+- Modern Compose forms with validation
+- Dynamic crop addition with Material dropdowns
+- **Real-time carbon credit calculation**
+- Automatic listing creation
+- Responsive layout design
+  ![Add Farm Screen](assets/add_farm.png)
+
+### 🛒 Marketplace
+- Beautiful Material 3 cards
+- Search functionality with real-time filtering
+- Smooth list animations
+- Pull-to-refresh support
+- Responsive grid/list layouts
+- ![Marketplace](assets/marketplace.png)
+
+### 🛍️ Shopping Cart
+- Interactive quantity controls
+- Swipe-to-delete gestures
+- Real-time total updates
+- Material dialogs for confirmation
+- Badge notifications
+
+### 👤 Buyer Profile
+- Clean form design
+- Status indicators
+- Form validation
+- Material 3 text fields
+  ![Buyer Profile](assets/farmer_profile.png)
