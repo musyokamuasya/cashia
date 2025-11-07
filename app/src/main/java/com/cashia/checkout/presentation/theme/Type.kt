@@ -1,4 +1,4 @@
-package com.cashia.checkout.ui.theme
+package com.cashia.checkout.presentation.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
