@@ -108,9 +108,8 @@ fun MainScreen(viewModel: MarketplaceViewModel) {
             }
             composable(Screen.Cart.route) {
                 CartScreen(
-                    viewModel = viewModel,
                     onNavigateToProfile = {
-                        navController.navigate(Screen.Profile.route)
+                        navController.navigate(Screen.Cart.route)
                     }
                 )
             }
