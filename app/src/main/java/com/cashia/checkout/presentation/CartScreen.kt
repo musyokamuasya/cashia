@@ -28,11 +28,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.cashia.core.model.CheckoutSessionRequest
-import com.cashia.core.model.DeliveryDetails
-import com.cashia.core.model.OrderDetail
-import com.cashia.ui.CashiaCheckoutDialog
-import com.cashia.ui.CheckoutResult
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

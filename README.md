@@ -1,3 +1,4 @@
+[![](https://jitpack.io/v/musyokamuasya/cashia-android.svg)](https://jitpack.io/#musyokamuasya/cashia-android)
 # Cashia Checkout Android SDK
 
 A native Android library for integrating Cashia's hosted checkout into your Android applications using Jetpack Compose. Similar to Stripe's Payment Sheet and RevenueCat's Paywall, this SDK provides a pre-built, customizable checkout UI that can be easily embedded in your app.

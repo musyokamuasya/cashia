@@ -57,9 +57,14 @@ android {
 
 dependencies {
 
-    api(project(":cashia-core"))
-    api(project(":cashia-ui"))
-    // Core module
+//    api(project(":cashia-core"))
+//    api(project(":cashia-ui"))
+//    // Core module
+
+
+
+    implementation("com.github.musyokamuasya.cashia-android:cashia-core:1.0.0")
+    implementation("com.github.musyokamuasya.cashia-android:cashia-ui:1.0.0")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
