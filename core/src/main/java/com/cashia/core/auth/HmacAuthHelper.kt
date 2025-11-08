@@ -1,9 +1,7 @@
 package com.cashia.core.auth
 
-import android.util.Log
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
-import kotlin.math.floor
 
 /**
  * Helper class for generating HMAC signatures for Cashia API authentication

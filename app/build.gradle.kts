@@ -56,16 +56,6 @@ android {
 }
 
 dependencies {
-
-//    api(project(":cashia-core"))
-//    api(project(":cashia-ui"))
-//    // Core module
-
-
-
-    implementation("com.github.musyokamuasya.cashia-android:cashia-core:1.0.0")
-    implementation("com.github.musyokamuasya.cashia-android:cashia-ui:1.0.0")
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -73,8 +63,6 @@ dependencies {
     implementation(libs.androidx.material3)
 
     implementation(libs.androidx.material.icons.extended)
-
-//    implementation(libs.androidx.navigation.compose)
     implementation(libs.navigation.compose)
 
     implementation(platform(libs.androidx.compose.bom))

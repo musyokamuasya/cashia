@@ -1,12 +1,12 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
     id("maven-publish")
-    id("org.jetbrains.kotlin.plugin.serialization")
 }
 
 android {
-    namespace = "com.cashia.core"
+    namespace = "com.cashia.ui"
     compileSdk = 36
 
     defaultConfig {
@@ -14,6 +14,13 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+    }
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
     }
 
     buildTypes {
@@ -32,6 +39,9 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+    buildFeatures {
+        compose = true
+    }
 
     packaging {
         resources {
@@ -41,17 +51,20 @@ android {
 }
 
 dependencies {
+    api(project(":core"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.material3)
 
-    // Networking
-    implementation(libs.okhttp)
-    implementation(libs.logging.interceptor)
-
-    // JSON Serialization
-    implementation(libs.kotlinx.serialization.json)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.material3)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -64,8 +77,8 @@ afterEvaluate {
             create<MavenPublication>("release") {
                 from(components["release"])
                 groupId = "com.github.musyokamuasya"
-                artifactId = "cashia-core"
-                version = "1.0.0"
+                artifactId = "ui"
+                version = "1.0.1"
             }
         }
     }

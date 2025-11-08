@@ -18,8 +18,8 @@ Add the Cashia Checkout SDK to your `build.gradle.kts`:
 
 ```kotlin
 dependencies {
-    implementation("com.cashia:cashia-core:1.0.0")
-    implementation("com.cashia:cashia-ui:1.0.0")
+    implementation("com.github.musyokamuasya.cashia:core:1.0.1")
+    implementation("com.github.musyokamuasya.cashia:ui:1.0.1")
 }
 ```
 
@@ -27,13 +27,13 @@ Or if you're building from source, include the modules:
 
 ```kotlin
 // settings.gradle.kts
-include(":cashia-core")
-include(":cashia-ui")
+include(":core")
+include(":ui")
 
 // build.gradle.kts
 dependencies {
-    api(project(":cashia-core"))
-    api(project(":cashia-ui"))
+    api(project(":core"))
+    api(project(":ui"))
 }
 ```
 
